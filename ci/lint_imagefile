@@ -14,6 +14,7 @@ COPY --from=ghcr.io/astral-sh/ruff:0.15 /ruff /bin/
 
 COPY ./ci/retry/retry /ci_retry
 COPY ./.python-version /.python-version
+COPY ./ci/lint/requirements.txt /ci/lint/requirements.txt
 COPY ./ci/lint/01_install.sh /install.sh
 
 RUN /install.sh && \
