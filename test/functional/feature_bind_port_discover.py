@@ -38,6 +38,24 @@ class BindPortDiscoverTest(BitcoinTestFramework):
         ]
         self.num_nodes = len(self.extra_args)
 
+    def setup_network(self):
+        """
+        Override to avoid connecting nodes together. This test intentionally does not connect nodes
+        because each node is bound to a different address or interface, and connections are not needed.
+        """
+        self.setup_nodes()
+
+    def setup_nodes(self):
+        """
+        Override to set has_explicit_bind=True for nodes with explicit bind arguments.
+        """
+        self.add_nodes(self.num_nodes, self.extra_args)
+        # TestNode.start() will add -bind= to extra_args if has_explicit_bind is
+        # False. We do not want any -bind= thus set has_explicit_bind to True.
+        for node in self.nodes:
+            node.has_explicit_bind = True
+        self.start_nodes()
+
     def add_options(self, parser):
         parser.add_argument(
             "--ihave1111and2222", action='store_true', dest="ihave1111and2222",
