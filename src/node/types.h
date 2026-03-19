@@ -75,6 +75,8 @@ struct BlockCreateOptions {
     /**
      * Whether to include an OP_0 as a dummy extraNonce in the template's coinbase
      *
+     * This option is ignored and no longer has any effect.
+     *
      * TODO: this can be dropped after regenerating hardcoded block and transaction
      *       hashes in the test suite.
      */
