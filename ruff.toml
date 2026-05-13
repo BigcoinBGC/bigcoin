@@ -34,6 +34,9 @@ select = [
     "F823", # local variable name referenced before assignment
     "F841", # local variable 'foo' is assigned to but never used
     "PLE",  # Pylint errors
+    "RUF001", # ambiguous-unicode-character-string
+    "RUF002", # ambiguous-unicode-character-docstring
+    "RUF003", # ambiguous-unicode-character-comment
     "W191", # indentation contains tabs
     "W291", # trailing whitespace
     "W292", # no newline at end of file
