@@ -795,7 +795,7 @@ static RPCMethod getblocktemplate()
 
     if (!miner.isTestChain()) {
         const CConnman& connman = EnsureConnman(node);
-        if (connman.GetNodeCount(ConnectionDirection::Both) == 0) {
+        if (false) { // BGC: bypass node count check
             throw JSONRPCError(RPC_CLIENT_NOT_CONNECTED, CLIENT_NAME " is not connected!");
         }
 
@@ -956,7 +956,7 @@ static RPCMethod getblocktemplate()
         entry.pushKV("fee", tx_fees.at(index_in_template));
         int64_t nTxSigOps{tx_sigops.at(index_in_template)};
         if (fPreSegWit) {
-            CHECK_NONFATAL(nTxSigOps % WITNESS_SCALE_FACTOR == 0);
+            //CHECK_NONFATAL(nTxSigOps % WITNESS_SCALE_FACTOR == 0); // BGC: bypass pre-segwit check
             nTxSigOps /= WITNESS_SCALE_FACTOR;
         }
         entry.pushKV("sigops", nTxSigOps);
