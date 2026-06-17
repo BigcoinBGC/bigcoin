@@ -112,11 +112,11 @@ public:
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
-         * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
-         * a large 32-bit integer with any alignment.
-         */
-        pchMessageStart[0] = 0xf9;
-        pchMessageStart[1] = 0xbe;
+        pchMessageStart[0] = 0xb6;
+        pchMessageStart[1] = 0x6c;
+        pchMessageStart[2] = 0x0c;
+        pchMessageStart[3] = 0x26;
+        nDefaultPort = 8444;
         pchMessageStart[2] = 0xb4;
         pchMessageStart[3] = 0xd9;
         nDefaultPort = 8333;
@@ -149,7 +149,7 @@ public:
         base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0x88, 0xB2, 0x1E};
         base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x88, 0xAD, 0xE4};
 
-        bech32_hrp = "bc";
+        bech32_hrp = "bgc";
 
         vFixedSeeds = std::vector<uint8_t>(std::begin(chainparams_seed_main), std::end(chainparams_seed_main));
 
