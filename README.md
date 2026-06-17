@@ -1,79 +1,168 @@
-Bitcoin Core integration/staging tree
-=====================================
+# Bigcoin (BGC)
 
-https://bitcoincore.org
+## The People’s Coin 🪙
 
-For an immediately usable, binary version of the Bitcoin Core software, see
-https://bitcoincore.org/en/download/.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Version](https://img.shields.io/badge/version-1.0.0-gold)](https://github.com/BigcoinBGC/bigcoin)
+[![Network](https://img.shields.io/badge/network-mainnet-green)](https://bigcion.org)
 
-What is Bitcoin Core?
----------------------
+Bigcoin (BGC) is a decentralized peer-to-peer digital currency for everyone in the world. Built on proven Bitcoin Core technology with a fixed supply of **21,000,000 BGC**.
 
-Bitcoin Core connects to the Bitcoin peer-to-peer network to download and fully
-validate blocks and transactions. It also includes a wallet and graphical user
-interface, which can be optionally built.
+> **“The People’s Coin”** — Secure, Decentralized, Accessible to Everyone.
 
-Further information about Bitcoin Core is available in the [doc folder](/doc).
+-----
 
-License
--------
+## 🌐 Links
 
-Bitcoin Core is released under the terms of the MIT license. See [COPYING](COPYING) for more
-information or see https://opensource.org/license/MIT.
+- **Website:** <https://bigcion.org>
+- **Mining Dashboard:** <https://bigcion.org>
+- **BGC Wallet:** <https://bigcion.org/wallet>
+- **Whitepaper:** <https://bigcion.org/whitepaper.html>
+- **Telegram:** <https://t.me/OfficialBigcoin>
 
-Development Process
--------------------
+-----
 
-The `master` branch is regularly built (see `doc/build-*.md` for instructions) and tested, but it is not guaranteed to be
-completely stable. [Tags](https://github.com/bitcoin/bitcoin/tags) are created
-regularly from release branches to indicate new official, stable release versions of Bitcoin Core.
+## ⚡ Key Features
 
-The https://github.com/bitcoin-core/gui repository is used exclusively for the
-development of the GUI. Its master branch is identical in all monotree
-repositories. Release branches and tags do not exist, so please do not fork
-that repository unless it is for development reasons.
+- ✅ **21,000,000 BGC** hard cap — deflationary by design
+- ✅ **SHA-256 Proof of Work** — same as Bitcoin
+- ✅ **10 minute blocks** — stable and reliable
+- ✅ **Native SegWit addresses** — bgc1q… format
+- ✅ **Halving every 210,000 blocks** — every 4 years
+- ✅ **Open Source** — fully auditable code
+- ✅ **Mobile Wallet** — iOS and Android
 
-The contribution workflow is described in [CONTRIBUTING.md](CONTRIBUTING.md)
-and useful hints for developers can be found in [doc/developer-notes.md](doc/developer-notes.md).
+-----
 
-Testing
--------
+## 📊 Technical Specifications
 
-Testing and code review is the bottleneck for development; we get more pull
-requests than we can review and test on short notice. Please be patient and help out by testing
-other people's pull requests, and remember this is a security-critical project where any mistake might cost people
-lots of money.
+|Parameter       |Value                 |
+|----------------|----------------------|
+|Ticker          |BGC                   |
+|Max Supply      |21,000,000 BGC        |
+|Smallest Unit   |1 Sam (0.00000001 BGC)|
+|Block Reward    |50 BGC                |
+|Block Time      |10 minutes            |
+|Halving Interval|210,000 blocks        |
+|Algorithm       |SHA-256 (PoW)         |
+|Address Format  |bgc1q… (bech32)       |
+|P2P Port        |8444                  |
+|Mining Port     |3333                  |
 
-### Automated Testing
+-----
 
-Developers are strongly encouraged to write [unit tests](src/test/README.md) for new code, and to
-submit new unit tests for old code. Unit tests can be compiled and run
-(assuming they weren't disabled during the generation of the build system) with: `ctest`. Further details on running
-and extending unit tests can be found in [/src/test/README.md](/src/test/README.md).
+## 🔧 Building from Source
 
-There are also [regression and integration tests](/test), written
-in Python.
-These tests can be run (if the [test dependencies](/test) are installed) with: `build/test/functional/test_runner.py`
-(assuming `build` is your build directory).
+### Requirements
 
-The CI (Continuous Integration) systems make sure that every pull request is tested on Windows, Linux, and macOS.
-The CI must pass on all commits before merge to avoid unrelated CI failures on new pull requests.
+- Ubuntu 20.04 or later (recommended)
+- 4GB RAM minimum
+- 50GB storage
 
-### Manual Quality Assurance (QA) Testing
+### Install Dependencies
 
-Changes should be tested by somebody other than the developer who wrote the
-code. This is especially important for large or high-risk changes. It is useful
-to add a test plan to the pull request description if testing the changes is
-not straightforward.
+```bash
+sudo apt-get update
+sudo apt-get install -y build-essential libtool autotools-dev automake pkg-config \
+  bsdmainutils python3 libssl-dev libevent-dev libboost-system-dev \
+  libboost-filesystem-dev libboost-test-dev libboost-thread-dev \
+  libminiupnpc-dev libzmq3-dev libsqlite3-dev
+```
 
-Translations
-------------
+### Clone and Build
 
-Changes to translations as well as new translations can be submitted to
-[Bitcoin Core's Transifex page](https://explore.transifex.com/bitcoin/bitcoin/).
+```bash
+git clone https://github.com/BigcoinBGC/bigcoin.git
+cd bigcoin
+./autogen.sh
+./configure --without-gui --disable-tests --disable-bench
+make -j4
+sudo make install
+```
 
-Translations are periodically pulled from Transifex and merged into the git repository. See the
-[translation process](doc/translation_process.md) for details on how this works.
+-----
 
-**Important**: We do not accept translation changes as GitHub pull requests because the next
-pull from Transifex would automatically overwrite them again.
+## 🚀 Running a BGC Node
+
+### Create Configuration
+
+```bash
+mkdir -p ~/.bitcoin
+cat > ~/.bitcoin/bitcoin.conf << EOF
+server=1
+daemon=1
+txindex=1
+rpcuser=yourrpcuser
+rpcpassword=yoursecurepassword
+rpcport=8332
+port=8444
+maxconnections=8
+addnode=95.111.234.167
+fallbackfee=0.0002
+walletbroadcast=1
+EOF
+```
+
+### Start the Node
+
+```bash
+bitcoind
+```
+
+### Check Status
+
+```bash
+bitcoin-cli getblockchaininfo
+bitcoin-cli getblockcount
+```
+
+-----
+
+## ⛏️ Mining BGC
+
+BGC uses SHA-256 algorithm — compatible with all Bitcoin ASIC miners.
+
+**Pool Settings:**
+
+```
+URL:      stratum+tcp://95.111.234.167:3333
+Worker:   bgc1q[your-address].worker1
+Password: x
+```
+
+-----
+
+## 💰 BGC Wallet
+
+- 🌐 **Web:** <https://bigcion.org/wallet>
+- 📱 **iOS:** Available on the App Store
+- 🤖 **Android:** Coming soon
+
+-----
+
+## 📈 Supply Schedule
+
+|Halving|Block Range        |Reward   |Year |
+|-------|-------------------|---------|-----|
+|Genesis|0 - 210,000        |50 BGC   |2026 |
+|1st    |210,001 - 420,000  |25 BGC   |~2030|
+|2nd    |420,001 - 630,000  |12.5 BGC |~2034|
+|3rd    |630,001 - 840,000  |6.25 BGC |~2038|
+|4th    |840,001 - 1,050,000|3.125 BGC|~2042|
+
+-----
+
+## 🤝 Community
+
+- **Telegram:** <https://t.me/OfficialBigcoin>
+- **Website:** <https://bigcion.org>
+
+-----
+
+## 📄 License
+
+Released under the MIT license. See <COPYING> for more information.
+
+-----
+
+*Bigcoin (BGC) — The People’s Coin — bigcion.org*
