@@ -4,7 +4,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Version](https://img.shields.io/badge/version-1.0.0-gold)](https://github.com/BigcoinBGC/bigcoin)
-[![Network](https://img.shields.io/badge/network-mainnet-green)](https://bigcion.org)
+[![Network](https://img.shields.io/badge/network-mainnet-green)](https://bigcoin.me)
 
 Bigcoin (BGC) is a decentralized peer-to-peer digital currency for everyone in the world. Built on proven Bitcoin Core technology with a fixed supply of **21,000,000 BGC**.
 
@@ -14,10 +14,10 @@ Bigcoin (BGC) is a decentralized peer-to-peer digital currency for everyone in t
 
 ## 🌐 Links
 
-- **Website:** <https://bigcion.org>
-- **Mining Dashboard:** <https://bigcion.org>
-- **BGC Wallet:** <https://bigcion.org/wallet>
-- **Whitepaper:** <https://bigcion.org/whitepaper.html>
+- **Website:** <https://bigcoin.me>
+- **Mining Dashboard:** <https://bigcoin.me>
+- **BGC Wallet:** <https://bigcoin.me/wallet>
+- **Whitepaper:** <https://bigcoin.me/whitepaper.html>
 - **Telegram:** <https://t.me/OfficialBigcoin>
 
 -----
@@ -134,7 +134,7 @@ Password: x
 
 ## 💰 BGC Wallet
 
-- 🌐 **Web:** <https://bigcion.org/wallet>
+- 🌐 **Web:** <https://bigcoin.me/wallet>
 - 📱 **iOS:** Available on the App Store
 - 🤖 **Android:** Coming soon
 
@@ -155,7 +155,7 @@ Password: x
 ## 🤝 Community
 
 - **Telegram:** <https://t.me/OfficialBigcoin>
-- **Website:** <https://bigcion.org>
+- **Website:** <https://bigcoin.me>
 
 -----
 
@@ -165,4 +165,4 @@ Released under the MIT license. See <COPYING> for more information.
 
 -----
 
-*Bigcoin (BGC) — The People’s Coin — bigcion.org*
+*Bigcoin (BGC) — The People’s Coin — bigcoin.me*
