@@ -1,168 +1,161 @@
-# Bigcoin (BGC)
-
-## The People’s Coin 🪙
+# Bigcoin (BGC) — The People's Coin 🪙
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/version-1.0.0-gold)](https://github.com/BigcoinBGC/bigcoin)
-[![Network](https://img.shields.io/badge/network-mainnet-green)](https://bigcoin.me)
 
-Bigcoin (BGC) is a decentralized peer-to-peer digital currency for everyone in the world. Built on proven Bitcoin Core technology with a fixed supply of **21,000,000 BGC**.
+Bigcoin (BGC) is a decentralized SHA-256 Proof of Work cryptocurrency — mine with any Bitcoin ASIC miner!
 
-> **“The People’s Coin”** — Secure, Decentralized, Accessible to Everyone.
+## Key Facts
 
------
+- **Ticker:** BGC
+- **Algorithm:** SHA-256 (same as Bitcoin)
+- **Max Supply:** 21,000,000 BGC
+- **Block Reward:** 50 BGC
+- **Block Time:** 10 minutes
+- **Port:** 8444
+- **Address Prefix:** bgc1q...
 
-## 🌐 Links
+## Quick Links
 
-- **Website:** <https://bigcoin.me>
-- **Mining Dashboard:** <https://bigcoin.me>
-- **BGC Wallet:** <https://bigcoin.me/wallet>
-- **Whitepaper:** <https://bigcoin.me/whitepaper.html>
-- **Telegram:** <https://t.me/OfficialBigcoin>
+- 🌐 **Website:** https://bigcoin.me
+- 💰 **Wallet:** https://bigcoin.me/wallet
+- 🔍 **Block Explorer:** https://bigcoin.me/explorer.html
+- 📄 **Whitepaper:** https://bigcoin.me/whitepaper.html
+- 🐦 **X:** https://x.com/bgc_bigcoin
+- 💬 **Telegram:** https://t.me/OfficialBigcoin
 
------
+---
 
-## ⚡ Key Features
+## Mining BGC
 
-- ✅ **21,000,000 BGC** hard cap — deflationary by design
-- ✅ **SHA-256 Proof of Work** — same as Bitcoin
-- ✅ **10 minute blocks** — stable and reliable
-- ✅ **Native SegWit addresses** — bgc1q… format
-- ✅ **Halving every 210,000 blocks** — every 4 years
-- ✅ **Open Source** — fully auditable code
-- ✅ **Mobile Wallet** — iOS and Android
+Any SHA-256 Bitcoin ASIC miner works:
+- Antminer S9, S17, S19, S21
+- Whatsminer M20, M30, M50
+- Avalon A1246, A1466, Nano3
 
------
-
-## 📊 Technical Specifications
-
-|Parameter       |Value                 |
-|----------------|----------------------|
-|Ticker          |BGC                   |
-|Max Supply      |21,000,000 BGC        |
-|Smallest Unit   |1 Sam (0.00000001 BGC)|
-|Block Reward    |50 BGC                |
-|Block Time      |10 minutes            |
-|Halving Interval|210,000 blocks        |
-|Algorithm       |SHA-256 (PoW)         |
-|Address Format  |bgc1q… (bech32)       |
-|P2P Port        |8444                  |
-|Mining Port     |3333                  |
-
------
-
-## 🔧 Building from Source
-
-### Requirements
-
-- Ubuntu 20.04 or later (recommended)
-- 4GB RAM minimum
-- 50GB storage
-
-### Install Dependencies
-
-```bash
-sudo apt-get update
-sudo apt-get install -y build-essential libtool autotools-dev automake pkg-config \
-  bsdmainutils python3 libssl-dev libevent-dev libboost-system-dev \
-  libboost-filesystem-dev libboost-test-dev libboost-thread-dev \
-  libminiupnpc-dev libzmq3-dev libsqlite3-dev
+**Pool Settings:**
+```
+URL:      stratum+tcp://95.111.234.167:3333
+Username: YourBGCAddress.worker1
+Password: x
 ```
 
-### Clone and Build
+Get your free BGC wallet at: **https://bigcoin.me/wallet**
 
+---
+
+## Running a BGC Node
+
+### Option 1 — Download Pre-compiled Binaries (Recommended)
+
+**Requirements:**
+- Ubuntu 20.04 or later (Linux x64)
+- 4 GB RAM minimum
+- 50 GB storage minimum
+
+**Step 1 — Download binaries:**
 ```bash
-git clone https://github.com/BigcoinBGC/bigcoin.git
-cd bigcoin
-./autogen.sh
-./configure --without-gui --disable-tests --disable-bench
-make -j4
-sudo make install
+wget https://github.com/BigcoinBGC/bigcoin/releases/download/v1.0.0/bitcoind
+wget https://github.com/BigcoinBGC/bigcoin/releases/download/v1.0.0/bitcoin-cli
 ```
 
------
+**Step 2 — Make executable and install:**
+```bash
+chmod +x bitcoind bitcoin-cli
+sudo mv bitcoind bitcoin-cli /usr/local/bin/
+```
 
-## 🚀 Running a BGC Node
-
-### Create Configuration
-
+**Step 3 — Create configuration file:**
 ```bash
 mkdir -p ~/.bitcoin
-cat > ~/.bitcoin/bitcoin.conf << EOF
+cat > ~/.bitcoin/bitcoin.conf << 'CONF'
 server=1
 daemon=1
 txindex=1
-rpcuser=yourrpcuser
-rpcpassword=yoursecurepassword
+rpcuser=bgcrpc
+rpcpassword=YourSecurePassword
 rpcport=8332
 port=8444
 maxconnections=8
-addnode=95.111.234.167
+addnode=95.111.234.167:8444
 fallbackfee=0.0002
 walletbroadcast=1
-EOF
+maxtxfee=1.0
+nocheckpoints=1
+CONF
 ```
 
-### Start the Node
-
+**Step 4 — Start the node:**
 ```bash
 bitcoind
 ```
 
-### Check Status
+**Step 5 — Check sync status:**
+```bash
+bitcoin-cli getblockcount
+bitcoin-cli getpeerinfo
+```
+
+---
+
+### Option 2 — Build from Source
+
+**Install dependencies:**
+```bash
+sudo apt update
+sudo apt install -y build-essential cmake git libssl-dev libevent-dev \
+libboost-system-dev libboost-filesystem-dev libboost-thread-dev \
+libminiupnpc-dev libzmq3-dev libsqlite3-dev
+```
+
+**Clone and build:**
+```bash
+git clone https://github.com/BigcoinBGC/bigcoin.git
+cd bigcoin
+cmake -B build -DENABLE_IPC=OFF -DBUILD_TESTS=OFF
+cmake --build build -j4
+sudo cmake --install build
+```
+
+---
+
+## Auto-start on Boot
 
 ```bash
-bitcoin-cli getblockchaininfo
+(crontab -l; echo "@reboot sleep 30 && bitcoind") | crontab -
+```
+
+---
+
+## Useful Commands
+
+```bash
+# Check block height
 bitcoin-cli getblockcount
+
+# Check network info
+bitcoin-cli getnetworkinfo
+
+# Check balance
+bitcoin-cli scantxoutset start '["addr(YourBGCAddress)"]'
+
+# Stop node
+bitcoin-cli stop
 ```
 
------
+---
 
-## ⛏️ Mining BGC
+## Network Info
 
-BGC uses SHA-256 algorithm — compatible with all Bitcoin ASIC miners.
+- **Main Node:** 95.111.234.167:8444
+- **Mining Pool:** stratum+tcp://95.111.234.167:3333
+- **Genesis Block:** c048ee6c34f9a061feb673738ef500911ad440fb52a462e20a1e09c319025635
 
-**Pool Settings:**
+---
 
-```
-URL:      stratum+tcp://95.111.234.167:3333
-Worker:   bgc1q[your-address].worker1
-Password: x
-```
+## License
 
------
+MIT License — see [COPYING](COPYING) for details.
 
-## 💰 BGC Wallet
+---
 
-- 🌐 **Web:** <https://bigcoin.me/wallet>
-- 📱 **iOS:** Available on the App Store
-- 🤖 **Android:** Coming soon
-
------
-
-## 📈 Supply Schedule
-
-|Halving|Block Range        |Reward   |Year |
-|-------|-------------------|---------|-----|
-|Genesis|0 - 210,000        |50 BGC   |2026 |
-|1st    |210,001 - 420,000  |25 BGC   |~2030|
-|2nd    |420,001 - 630,000  |12.5 BGC |~2034|
-|3rd    |630,001 - 840,000  |6.25 BGC |~2038|
-|4th    |840,001 - 1,050,000|3.125 BGC|~2042|
-
------
-
-## 🤝 Community
-
-- **Telegram:** <https://t.me/OfficialBigcoin>
-- **Website:** <https://bigcoin.me>
-
------
-
-## 📄 License
-
-Released under the MIT license. See <COPYING> for more information.
-
------
-
-*Bigcoin (BGC) — The People’s Coin — bigcoin.me*
+*Bigcoin (BGC) — The People's Coin — bigcoin.me*
