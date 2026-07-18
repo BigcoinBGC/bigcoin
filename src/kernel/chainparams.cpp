@@ -112,21 +112,21 @@ public:
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
+         * It is unlikely to occur in normal data as it is uncommon for a large 32-bit
+         * integer with any alignment.
+         */
         pchMessageStart[0] = 0xb6;
         pchMessageStart[1] = 0x6c;
         pchMessageStart[2] = 0x0c;
         pchMessageStart[3] = 0x26;
         nDefaultPort = 8444;
-        pchMessageStart[2] = 0xb4;
-        pchMessageStart[3] = 0xd9;
-        nDefaultPort = 8333;
         nPruneAfterHeight = 100000;
         m_assumed_blockchain_size = 856;
         m_assumed_chain_state_size = 14;
 
-        genesis = CreateGenesisBlock(1231006505, 2083236893, 0x1d00ffff, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1780668172, 8342558, 0x1e0fffff, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256{"000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f"});
+        assert(consensus.hashGenesisBlock == uint256{"c048ee6c34f9a061feb673738ef500911ad440fb52a462e20a1e09c319025635"});
         assert(genesis.hashMerkleRoot == uint256{"4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b"});
 
         // Note that of those which support the service bits prefix, most only support a subset of
@@ -144,7 +144,7 @@ public:
 
         bech32_hrp = "bgc";
 
-        vFixedSeeds = std::vector<uint8_t>(std::begin(chainparams_seed_main), std::end(chainparams_seed_main));
+        vFixedSeeds.clear(); // BGC Network - no fixed seeds, use addnode=95.111.234.167:8444
 
         fDefaultConsistencyChecks = false;
         m_is_mockable_chain = false;
