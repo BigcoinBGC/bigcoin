@@ -54,8 +54,8 @@ Get your free BGC wallet at: **https://bigcoin.me/wallet**
 
 **Step 1 — Download binaries:**
 ```bash
-wget https://github.com/BigcoinBGC/bigcoin/releases/download/v1.0.0/bitcoind
-wget https://github.com/BigcoinBGC/bigcoin/releases/download/v1.0.0/bitcoin-cli
+wget https://github.com/BigcoinBGC/bigcoin/releases/download/v1.0.1/bitcoind
+wget https://github.com/BigcoinBGC/bigcoin/releases/download/v1.0.1/bitcoin-cli
 ```
 
 **Step 2 — Make executable and install:**
