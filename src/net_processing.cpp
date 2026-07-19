@@ -3527,7 +3527,7 @@ void PeerManagerImpl::ProcessMessage(CNode& pfrom, const std::string& msg_type, 
         {
             LOCK(cs_main);
             CNodeState* state = State(pfrom.GetId());
-            state->fPreferredDownload = (!pfrom.IsInboundConn() || pfrom.HasPermission(NetPermissionFlags::NoBan)) && !pfrom.IsAddrFetchConn() && CanServeBlocks(*peer);
+            state->fPreferredDownload = CanServeBlocks(*peer); // BGC: all peers are preferred download peers
             m_num_preferred_download_peers += state->fPreferredDownload;
         }
 
