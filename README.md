@@ -52,7 +52,7 @@ Get your free BGC wallet at: **https://bigcoin.me/wallet**
 - 4 GB RAM minimum
 - 50 GB storage minimum
 
-**Step 1 — Download binaries:**
+**Step 1 — Download latest binaries (v1.0.1):**
 ```bash
 wget https://github.com/BigcoinBGC/bigcoin/releases/download/v1.0.1/bitcoind
 wget https://github.com/BigcoinBGC/bigcoin/releases/download/v1.0.1/bitcoin-cli
@@ -148,7 +148,7 @@ bitcoin-cli stop
 
 - **Main Node:** 95.111.234.167:8444
 - **Mining Pool:** stratum+tcp://95.111.234.167:3333
-- **Genesis Block:** c048ee6c34f9a061feb673738ef500911ad440fb52a462e20a1e09c319025635
+- **Genesis Block:** 000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f
 
 ---
 
