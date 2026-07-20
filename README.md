@@ -6,13 +6,16 @@ Bigcoin (BGC) is a decentralized SHA-256 Proof of Work cryptocurrency — mine w
 
 ## Key Facts
 
-- **Ticker:** BGC
-- **Algorithm:** SHA-256 (same as Bitcoin)
-- **Max Supply:** 21,000,000 BGC
-- **Block Reward:** 50 BGC
-- **Block Time:** 10 minutes
-- **Port:** 8444
-- **Address Prefix:** bgc1q...
+| Property | Value |
+|----------|-------|
+| Ticker | BGC |
+| Algorithm | SHA-256 (same as Bitcoin) |
+| Max Supply | 21,000,000 BGC |
+| Block Reward | 50 BGC |
+| Block Time | 10 minutes |
+| P2P Port | 8444 |
+| Address Prefix | bgc1q... |
+| DNS Seed | seed.bigcoin.me |
 
 ## Quick Links
 
@@ -25,81 +28,114 @@ Bigcoin (BGC) is a decentralized SHA-256 Proof of Work cryptocurrency — mine w
 
 ---
 
-## Mining BGC
+## 🚀 Quick Start — Run a BGC Node (3 commands)
+
+```bash
+wget https://raw.githubusercontent.com/BigcoinBGC/bigcoin/master/setup.sh
+chmod +x setup.sh
+./setup.sh
+```
+
+That's it! The script automatically:
+- Downloads BGC binaries from GitHub
+- Creates configuration
+- Downloads blockchain from bigcoin.me (535MB)
+- Starts your node
+
+**Check your node is running:**
+```bash
+bitcoin-cli -rpcuser=bgcnode -rpcpassword=bgcnode2026 getblockcount
+```
+
+---
+
+## ⛏️ Run a Mining Pool (3 commands)
+
+First make sure your node is running and synced, then:
+
+```bash
+wget https://raw.githubusercontent.com/BigcoinBGC/bigcoin/master/setup_mining.sh
+chmod +x setup_mining.sh
+./setup_mining.sh
+```
+
+The script will ask for your BGC wallet address and set up everything automatically.
+
+**Connect your ASIC miner to:**
+```
+URL:      stratum+tcp://YOUR-SERVER-IP:3333
+Username: YOUR-BGC-ADDRESS.worker1
+Password: x
+```
+
+Get a free BGC wallet at: **https://bigcoin.me/wallet**
+
+---
+
+## Mining on Main Pool
 
 Any SHA-256 Bitcoin ASIC miner works:
 - Antminer S9, S17, S19, S21
 - Whatsminer M20, M30, M50
 - Avalon A1246, A1466, Nano3
 
-**Pool Settings:**
+**Main Pool Settings:**
 ```
 URL:      stratum+tcp://95.111.234.167:3333
 Username: YourBGCAddress.worker1
 Password: x
 ```
 
-Get your free BGC wallet at: **https://bigcoin.me/wallet**
-
 ---
 
-## Running a BGC Node
+## Manual Node Setup
 
-### Option 1 — Download Pre-compiled Binaries (Recommended)
-
-**Requirements:**
+### Requirements
 - Ubuntu 20.04 or later (Linux x64)
 - 4 GB RAM minimum
 - 50 GB storage minimum
 
-**Step 1 — Download latest binaries (v1.0.1):**
+### Step 1 — Download binaries
 ```bash
-wget https://github.com/BigcoinBGC/bigcoin/releases/download/v1.0.1/bitcoind
-wget https://github.com/BigcoinBGC/bigcoin/releases/download/v1.0.1/bitcoin-cli
-```
-
-**Step 2 — Make executable and install:**
-```bash
+wget https://github.com/BigcoinBGC/bigcoin/releases/latest/download/bitcoind
+wget https://github.com/BigcoinBGC/bigcoin/releases/latest/download/bitcoin-cli
 chmod +x bitcoind bitcoin-cli
 sudo mv bitcoind bitcoin-cli /usr/local/bin/
 ```
 
-**Step 3 — Create configuration file:**
+### Step 2 — Create configuration
 ```bash
 mkdir -p ~/.bitcoin
-cat > ~/.bitcoin/bitcoin.conf << 'CONF'
-server=1
-daemon=1
-txindex=1
-rpcuser=bgcrpc
-rpcpassword=YourSecurePassword
-rpcport=8332
-port=8444
-maxconnections=8
-addnode=95.111.234.167:8444
-fallbackfee=0.0002
-walletbroadcast=1
-maxtxfee=1.0
-nocheckpoints=1
-CONF
+echo "server=1" > ~/.bitcoin/bitcoin.conf
+echo "daemon=1" >> ~/.bitcoin/bitcoin.conf
+echo "rpcuser=bgcnode" >> ~/.bitcoin/bitcoin.conf
+echo "rpcpassword=bgcnode2026" >> ~/.bitcoin/bitcoin.conf
+echo "maxconnections=16" >> ~/.bitcoin/bitcoin.conf
 ```
 
-**Step 4 — Start the node:**
+### Step 3 — Download blockchain (faster sync)
+```bash
+wget https://bigcoin.me/bootstrap/bgc_bootstrap.tar.gz
+tar -xzf bgc_bootstrap.tar.gz -C ~/.bitcoin/
+rm bgc_bootstrap.tar.gz
+```
+
+### Step 4 — Start node
 ```bash
 bitcoind
 ```
 
-**Step 5 — Check sync status:**
+### Step 5 — Verify sync
 ```bash
-bitcoin-cli getblockcount
-bitcoin-cli getpeerinfo
+bitcoin-cli -rpcuser=bgcnode -rpcpassword=bgcnode2026 getblockcount
+bitcoin-cli -rpcuser=bgcnode -rpcpassword=bgcnode2026 getblockchaininfo
 ```
 
 ---
 
-### Option 2 — Build from Source
+## Build from Source
 
-**Install dependencies:**
+### Install dependencies
 ```bash
 sudo apt update
 sudo apt install -y build-essential cmake git libssl-dev libevent-dev \
@@ -107,7 +143,7 @@ libboost-system-dev libboost-filesystem-dev libboost-thread-dev \
 libminiupnpc-dev libzmq3-dev libsqlite3-dev
 ```
 
-**Clone and build:**
+### Clone and build
 ```bash
 git clone https://github.com/BigcoinBGC/bigcoin.git
 cd bigcoin
@@ -130,16 +166,19 @@ sudo cmake --install build
 
 ```bash
 # Check block height
-bitcoin-cli getblockcount
+bitcoin-cli -rpcuser=bgcnode -rpcpassword=bgcnode2026 getblockcount
 
-# Check network info
-bitcoin-cli getnetworkinfo
+# Check sync status
+bitcoin-cli -rpcuser=bgcnode -rpcpassword=bgcnode2026 getblockchaininfo
 
-# Check balance
-bitcoin-cli scantxoutset start '["addr(YourBGCAddress)"]'
+# Check peers
+bitcoin-cli -rpcuser=bgcnode -rpcpassword=bgcnode2026 getpeerinfo
+
+# Check mining info
+bitcoin-cli -rpcuser=bgcnode -rpcpassword=bgcnode2026 getmininginfo
 
 # Stop node
-bitcoin-cli stop
+bitcoin-cli -rpcuser=bgcnode -rpcpassword=bgcnode2026 stop
 ```
 
 ---
@@ -147,8 +186,9 @@ bitcoin-cli stop
 ## Network Info
 
 - **Main Node:** 95.111.234.167:8444
+- **DNS Seed:** seed.bigcoin.me
 - **Mining Pool:** stratum+tcp://95.111.234.167:3333
-- **Genesis Block:** 000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f
+- **Bootstrap:** https://bigcoin.me/bootstrap/bgc_bootstrap.tar.gz
 
 ---
 
