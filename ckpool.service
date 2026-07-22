@@ -1,0 +1,17 @@
+[Unit]
+Description=CKPool BGC Mining Pool
+After=network.target bitcoind.service
+Requires=bitcoind.service
+
+[Service]
+Type=forking
+User=root
+ExecStartPre=/bin/rm -rf /tmp/ckpool
+ExecStart=/usr/local/bin/ckpool -c /etc/ckpool/ckpool.conf -B
+ExecStop=/bin/kill -2 
+Restart=on-failure
+RestartSec=30
+TimeoutStartSec=120
+
+[Install]
+WantedBy=multi-user.target
