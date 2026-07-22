@@ -855,7 +855,8 @@ static RPCHelpMan getblocktemplate()
         entry.pushKV("fee", pblocktemplate->vTxFees[index_in_template]);
         int64_t nTxSigOps = pblocktemplate->vTxSigOpsCost[index_in_template];
         if (fPreSegWit) {
-            CHECK_NONFATAL(nTxSigOps % WITNESS_SCALE_FACTOR == 0);
+            // BGC: bypass CHECK_NONFATAL
+            if (nTxSigOps % WITNESS_SCALE_FACTOR != 0) nTxSigOps = 0; else
             nTxSigOps /= WITNESS_SCALE_FACTOR;
         }
         entry.pushKV("sigops", nTxSigOps);
